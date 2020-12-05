@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <h1>My First JavaScript</h1>
+    <p>Here, a JavaScript changes the value of the src (source) attribute of an image.</p>
+
+    <script>
+        function light(sw) {
+            var pic;
+            if (sw == 0) {
+                pic = "pic_bulboff.gif"
+            } else {
+                pic = "pic_bulbon.gif"
+            }
+            document.getElementById('myImage').src = pic;
+        }
+
+        function swapImages(cnt) {
+            setTimeout(
+                function () {
+
+                    var imgSrc = document.getElementById('myImage').src.toString();
+                    var imgFileName = imgSrc.match(/([^\/]*)\/*$/)[1];
+                    var sw = 0;
+
+                    if (imgFileName == "pic_bulboff.gif") {
+                        imgFileName = "./pic_bulbon.gif";
+                    } else {
+                        imgFileName = "./pic_bulboff.gif";
+                    }
+
+                    document.getElementById('myImage').src = imgFileName;
+
+                }, 2000 * cnt);
+        }
+
+        function flickSwitchCounter() {
+            var switchCnt = document.getElementById('switch').value;
+
+            for (i = 0; i < switchCnt; i++) {
+                swapImages(i)
+            }
+        }
+    </script>
+
+    <img id="myImage" src="pic_bulboff.gif" width="100" height="180">
+
+    <p>
+        <button type="button" onclick="light(1)">Light On</button>
+        <button type="button" onclick="light(0)">Light Off</button>
+    </p>
+
+    <p>
+        <label>How Many Times To Flick Switch?</label>
+        <input id="switch" type="text">
+        <button type="button" onclick="flickSwitchCounter()">Flick Switch</button>
+    </p>
+
+
+</body>
+
+</html>
